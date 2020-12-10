@@ -36,7 +36,7 @@ class LoginAuth
     }
     //未登录
     protected function logout(){
-        return errorResponse('请重新登录',400);
+        return errorResponse('请重新登录',401);
     }
     //检查权限
     protected function checkPower($power,Request $request){
