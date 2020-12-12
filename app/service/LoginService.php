@@ -54,6 +54,7 @@ class LoginService extends BaseService
         $data->save();
         $result['token']=$token;
         $result['avatar']=$data->avatar;
+        $result['role_name']=$data->role->name;
         return successResponse('登录成功',$result);
     }
     public function logout($params){

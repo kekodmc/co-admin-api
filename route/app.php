@@ -11,13 +11,13 @@
 use think\facade\Route;
 
 Route::group('api',function (){
-    Route::get('getLotteryPksInfo','Index/api');
     Route::post('login','Login/login');
     Route::group(function (){
         Route::post('logout','Login/logout');
         Route::get('admin/role','Admin/role');
         Route::post('admin/disable','Admin/disable');
         Route::resource('admin','Admin');
+        Route::resource('account','Account');
         Route::get('power/mod','Power/mod');
         Route::resource('power','Power');
         Route::get('role/power','Role/power');

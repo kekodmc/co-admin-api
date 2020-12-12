@@ -39,11 +39,15 @@ class LoginAuth
         return errorResponse('请重新登录',401);
     }
     //检查权限
+    protected $safeList=[
+        'login-logout',
+        'account-update',
+    ];//白名单
     protected function checkPower($power,Request $request){
         $c=$request->controller(true);
         $a=$request->action();
         $url="$c-$a";
-        if($url=='login-logout'){
+        if(in_array($url,$this->safeList)){
             return true;
         }
         if(in_array($url,$power)){
