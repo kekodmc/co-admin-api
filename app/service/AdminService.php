@@ -19,8 +19,15 @@ class AdminService extends BaseService
         $page=getPage($params);
         $sort=getSort($params);
         $username=$params['username']??'';
+        $date=$params['date']??[];
+        $startTime=$date[0]??null;
+        $endTime=$date[1]??null;
         $list=AdminModel::when($username,function ($q)use($username){
             $q->where('username','like',"$username%");
+        })->when($startTime,function ($q)use($startTime){
+            $q->where('login_time','>=',strtotime($startTime));
+        })->when($endTime,function ($q)use($endTime){
+            $q->where('login_time','<=',strtotime($endTime." 23:59:59"));
         });
         $total=$list->count();
         $list=$list->with('role')->withoutField('password')
